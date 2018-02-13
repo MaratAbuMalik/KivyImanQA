@@ -4,7 +4,7 @@ from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
 from kivy.properties import StringProperty
 from kivy.properties import BooleanProperty
-import database
+from database import test_database
 
 Builder.load_string('''
 <Test>:
@@ -99,7 +99,7 @@ class Test(Screen):
 
     def next_question(self):
         self.question_num += 1
-        current_question = database.questions[self.question_num]
+        current_question = test_database[self.question_num]['question']
         self.question = current_question
 
     def erase_checkboxes(self):
