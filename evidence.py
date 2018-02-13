@@ -1,16 +1,11 @@
-#  -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
-from kivy.app import App
-from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.uix.scrollview import ScrollView
+from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
-from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.button import Label
-from kivy.uix.textinput import TextInput
-from kivy.properties import ObjectProperty, StringProperty
+from kivy.properties import StringProperty
 
 import globals
-from imanqa_database import unique_evidences
+from database import unique_evidences
 
 Builder.load_string('''
 <Evidence>:
@@ -30,4 +25,4 @@ class Evidence(Screen):
 
     # on_enter, on_pre_leave, on_leave
     def on_enter(self):
-        self.evidence_text = unique_evidences[globals.MY_NUMBER]
+        self.evidence_text = unique_evidences[globals.evidence_num]

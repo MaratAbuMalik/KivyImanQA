@@ -1,15 +1,16 @@
-from kivy.app import App
+# -*- coding: utf-8 -*-
+
 from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
 
 import globals
-from imanqa_database import unique_questions
+from database import unique_questions
 
 Builder.load_string('''
 #:import ListItemButton kivy.uix.listview.ListItemButton
 #:import ListAdapter kivy.adapters.listadapter.ListAdapter
 
-<QuestionList>:
+<Questions>:
     pos_hint: {'center_x': .5, 'center_y': .5}
     do_default_tab: False
 
@@ -26,11 +27,11 @@ Builder.load_string('''
 ''')
 
 
-class QuestionList(Screen):
+class Questions(Screen):
     def __init__(self, **kwargs):
         self.screen_manager = kwargs['screen_manager']
         del kwargs['screen_manager']
-        super(QuestionList, self).__init__(**kwargs)
+        super(Questions, self).__init__(**kwargs)
 
         self.ids['list_view_id'].adapter.bind(on_selection_change=self.click)
         for i in range(len(unique_questions)):
@@ -43,5 +44,5 @@ class QuestionList(Screen):
         text = str(args[0].selection[0])
         pos1 = text.find('text=') + 5
         pos2 = text.find('.', pos1)
-        globals.MY_NUMBER = int(text[pos1:pos2]) - 1
+        globals.evidence_num = int(text[pos1:pos2]) - 1
         self.screen_manager.current = 'evidence'

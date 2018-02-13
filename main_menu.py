@@ -1,12 +1,7 @@
-#  -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
-from kivy.app import App
-from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
-from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.button import Label
-from kivy.uix.textinput import TextInput
-from kivy.properties import ObjectProperty, StringProperty
 
 Builder.load_string('''
 <MainMenu>:
@@ -32,11 +27,13 @@ Builder.load_string('''
             id: learn_questions
             text: 'Изучить вопросы'
             on_press: 
-                root.manager.current = 'question_list'
+                root.manager.current = 'questions'
 
         Button:
             id: start_test
-            text: 'start_test'
+            text: 'Начать тест'
+            on_press: 
+                root.manager.current = 'test'
 ''')
 
 
