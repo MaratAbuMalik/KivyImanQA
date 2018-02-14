@@ -83,22 +83,25 @@ Builder.load_string('''
 
 
 class Test(Screen):
-    answer_num = -1
-    question_num = -1
-    question = StringProperty()
     is_checkbox_0_active = BooleanProperty(False)
     is_checkbox_1_active = BooleanProperty(False)
     is_checkbox_2_active = BooleanProperty(False)
     is_checkbox_3_active = BooleanProperty(False)
+    question = StringProperty()
     answer0 = StringProperty()
     answer1 = StringProperty()
     answer2 = StringProperty()
     answer3 = StringProperty()
-    order = None
+
+    def erase_data(self):
+        self.answer_num = -1
+        self.question_num = -1
+        self.order = None
 
     def on_enter(self):
         globals.test_answers = []
         globals.test_questions = self.get_test_questions()
+        self.erase_data()
         self.next_question()
 
     def confirm_answer(self):
@@ -106,11 +109,11 @@ class Test(Screen):
             self.erase_checkboxes()
             globals.test_answers.append({'question_num': globals.test_questions[self.question_num], 'answer_num': self.order[self.answer_num]})
             print(globals.test_answers)
-            if self.question_num == globals.questions_num - 1:
-                
-                exit(0)
-            self.next_question()
             self.answer_num = -1
+            if self.question_num == globals.questions_num - 1:
+                self.manager.current = 'result'
+                return
+            self.next_question()
 
     def next_question(self):
         self.question_num += 1

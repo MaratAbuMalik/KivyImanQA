@@ -7,6 +7,7 @@ from main_menu import MainMenu
 from questons import Questions
 from evidence import Evidence
 from test import Test
+from result import Result
 
 
 class MainApp(App):
@@ -16,10 +17,12 @@ class MainApp(App):
         questions_screen = Questions(name='questions')
         evidence_screen = Evidence(name='evidence')
         test_screen = Test(name='test')
+        result_screen = Result(name='result')
         screen_manager.add_widget(main_menu_screen)
         screen_manager.add_widget(questions_screen)
         screen_manager.add_widget(evidence_screen)
         screen_manager.add_widget(test_screen)
+        screen_manager.add_widget(result_screen)
         return screen_manager
 
 
