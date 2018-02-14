@@ -13,7 +13,7 @@ class MainApp(App):
     def build(self):
         screen_manager = ScreenManager()
         main_menu_screen = MainMenu(name='main_menu')
-        questions_screen = Questions(name='questions', screen_manager=screen_manager)
+        questions_screen = Questions(name='questions')
         evidence_screen = Evidence(name='evidence')
         test_screen = Test(name='test')
         screen_manager.add_widget(main_menu_screen)

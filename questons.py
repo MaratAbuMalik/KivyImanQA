@@ -29,8 +29,6 @@ Builder.load_string('''
 
 class Questions(Screen):
     def __init__(self, **kwargs):
-        self.screen_manager = kwargs['screen_manager']
-        del kwargs['screen_manager']
         super(Questions, self).__init__(**kwargs)
 
         self.ids['list_view_id'].adapter.bind(on_selection_change=self.click)
@@ -45,4 +43,4 @@ class Questions(Screen):
         pos1 = text.find('text=') + 5
         pos2 = text.find('.', pos1)
         globals.evidence_num = int(text[pos1:pos2]) - 1
-        self.screen_manager.current = 'evidence'
+        self.manager.current = 'evidence'
