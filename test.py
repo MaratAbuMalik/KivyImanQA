@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 
+import random
+
 from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
 from kivy.properties import StringProperty
 from kivy.properties import BooleanProperty
 from database import test_database
+
+import globals
 
 Builder.load_string('''
 <Test>:
@@ -35,7 +39,7 @@ Builder.load_string('''
             Label:
                 id: answer_0
                 text_size: self.size
-                text: 'answer 0'
+                text: root.answer0
 
             CheckBox:
                 group: 'answers'
@@ -46,7 +50,7 @@ Builder.load_string('''
             Label:
                 id: answer_1
                 text_size: self.size
-                text: 'answer 1'
+                text: root.answer1
 
             CheckBox:
                 group: 'answers'
@@ -57,7 +61,7 @@ Builder.load_string('''
             Label:
                 id: answer_2
                 text_size: self.size
-                text: 'answer 2'
+                text: root.answer2
 
             CheckBox:
                 group: 'answers'
@@ -68,7 +72,7 @@ Builder.load_string('''
             Label:
                 id: answer_3
                 text_size: self.size
-                text: 'answer 3'
+                text: root.answer3
 
         Button:
             id: start_test
@@ -86,21 +90,34 @@ class Test(Screen):
     is_checkbox_1_active = BooleanProperty(False)
     is_checkbox_2_active = BooleanProperty(False)
     is_checkbox_3_active = BooleanProperty(False)
+    answer0 = StringProperty()
+    answer1 = StringProperty()
+    answer2 = StringProperty()
+    answer3 = StringProperty()
+    order = None
 
     def on_enter(self):
+        globals.test_answers = []
+        globals.test_questions = self.get_test_questions()
         self.next_question()
 
     def confirm_answer(self):
         if self.answer_num > -1:
             self.erase_checkboxes()
+            globals.test_answers.append({'question_num': globals.test_questions[self.question_num], 'answer_num': self.order[self.answer_num]})
+            print(globals.test_answers)
+            if self.question_num == globals.questions_num - 1:
+                
+                exit(0)
             self.next_question()
-            print(self.answer_num)
             self.answer_num = -1
 
     def next_question(self):
         self.question_num += 1
-        current_question = test_database[self.question_num]['question']
+        current_question = test_database[globals.test_questions[self.question_num]]['question']
         self.question = current_question
+        self.order = self.new_answers_order()
+        self.fill_answers()
 
     def erase_checkboxes(self):
         if self.answer_num == 0:
@@ -115,3 +132,34 @@ class Test(Screen):
         if self.answer_num == 3:
             self.is_checkbox_3_active = not self.is_checkbox_3_active
             self.is_checkbox_3_active = not self.is_checkbox_3_active
+
+    def fill_answers(self):
+        self.answer0 = test_database[globals.test_questions[self.question_num]]['answers'][self.order[0]]
+        self.answer1 = test_database[globals.test_questions[self.question_num]]['answers'][self.order[1]]
+        self.answer2 = test_database[globals.test_questions[self.question_num]]['answers'][self.order[2]]
+        self.answer3 = test_database[globals.test_questions[self.question_num]]['answers'][self.order[3]]
+
+    def new_answers_order(self):
+        order = list(range(4))
+        for i in range(10):
+            x = random.randrange(4)
+            y = random.randrange(4)
+            order[y], order[x] = order[x], order[y]
+        print(order)
+        return order
+
+    def get_test_questions(self):
+        edges = [0]
+        questions = []
+        for i in range(1, globals.questions_num):
+            edges.append(edges[i - 1] + len(test_database) // globals.questions_num)
+        edges.append(len(test_database))
+
+        for i in range(globals.questions_num):
+            questions.append(random.randrange(edges[i], edges[i+1]))
+
+        return questions
+
+
+
+
