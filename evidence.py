@@ -10,6 +10,7 @@ from database import evidences
 Builder.load_string('''
 <Evidence>:
     BoxLayout:
+        orientation: 'vertical'
         ScrollView:
             Label:
                 padding: [8, 8]
