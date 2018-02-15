@@ -5,10 +5,10 @@ from kivy.lang import Builder
 from kivy.properties import StringProperty
 
 import globals
-from database import evidences
+from database import unique_evidences
 
 Builder.load_string('''
-<Evidence>:
+<EvidenceUnique>:
     ScrollView:
         Label:
             padding: [8, 8]
@@ -20,9 +20,9 @@ Builder.load_string('''
 ''')
 
 
-class Evidence(Screen):
+class EvidenceUnique(Screen):
     evidence_text = StringProperty()
 
     # on_enter, on_pre_leave, on_leave
     def on_enter(self):
-        self.evidence_text = evidences[globals.evidence_num]
+        self.evidence_text = unique_evidences[globals.evidence_num]

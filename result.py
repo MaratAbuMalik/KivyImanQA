@@ -27,7 +27,7 @@ Builder.load_string('''
             id: show_answers
             text: 'Мои ответы'
             on_press: 
-                root.manager.current = 'test'
+                root.manager.current = 'answers'
 ''')
 
 
