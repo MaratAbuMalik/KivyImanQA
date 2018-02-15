@@ -24,11 +24,16 @@ Builder.load_string('''
                 ListAdapter(
                 data=[], 
                 cls=ListItemButton)
+        Button:
+            text: 'Назад'
+            on_press: 
+                root.manager.current = 'result'
 ''')
 
 
 class Answers(Screen):
     def on_enter(self):
+        self.ids['list_view_id'].adapter.data = []
         self.ids['list_view_id'].adapter.bind(on_selection_change=self.click)
         for i in range(globals.questions_num):
             self.add(str(i + 1) + '. ' + questions[globals.test_answers[i]['question_num']])
@@ -37,9 +42,14 @@ class Answers(Screen):
         self.ids['list_view_id'].adapter.data.append(text)
 
     def click(self, *args):
-        text = str(args[0].selection[0])
-        pos1 = text.find('text=') + 5
-        pos2 = text.find('.', pos1)
-        globals.evidence_num = globals.test_answers[int(text[pos1:pos2]) - 1]['question_num']
-        print(globals.evidence_num)
-        self.manager.current = 'evidence'
+        # для нормальной работы кнопки назад на экране доводов
+        try:
+            text = str(args[0].selection[0])
+            pos1 = text.find('text=') + 5
+            pos2 = text.find('.', pos1)
+            globals.evidence_num = globals.test_answers[int(text[pos1:pos2]) - 1]['question_num']
+            print(globals.evidence_num)
+            self.manager.current = 'evidence'
+        except:
+            pass
+

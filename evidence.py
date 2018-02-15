@@ -9,13 +9,19 @@ from database import evidences
 
 Builder.load_string('''
 <Evidence>:
-    ScrollView:
-        Label:
-            padding: [8, 8]
-            size_hint_y: None
-            height: self.texture_size[1]
-            text_size: self.width, None
-            text: root.evidence_text
+    BoxLayout:
+        ScrollView:
+            Label:
+                padding: [8, 8]
+                size_hint_y: None
+                height: self.texture_size[1]
+                text_size: self.width, None
+                text: root.evidence_text
+        
+        Button:
+            text: 'Назад'
+            on_press: 
+                root.manager.current = 'answers'
 
 ''')
 
