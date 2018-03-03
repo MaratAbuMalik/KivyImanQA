@@ -6,8 +6,6 @@ questions = []
 right_answers = []
 wrong_answers = []
 evidences = []
-unique_questions = []
-unique_evidences = []
 
 test_database = []
 
@@ -40,14 +38,11 @@ if '' in questions or '' in right_answers or '' in wrong_answers or '' in eviden
     print("empty element")
     raise SystemExit
 
-for i in range(len(questions)):
-    if i == 0:
-        unique_questions.append(questions[i])
-        unique_evidences.append(evidences[i])
-    else:
-        if questions[i] != questions[i - 1]:
-            unique_questions.append(questions[i])
-            unique_evidences.append(evidences[i])
+unique_questions = [0]
+unique_counter = 0
+for i in range(1, len(questions)):
+    if questions[i] != questions[i - 1]:
+        unique_questions.append(i)
 
 if __name__ == '__main__':
     print('Вопросы:')
@@ -76,12 +71,6 @@ if __name__ == '__main__':
 
     print('Уникальные вопросы:')
     for i in unique_questions:
-        print(i)
-    else:
-        print()
-
-    print('Ответы на уникальные вопросы:')
-    for i in unique_evidences:
         print(i)
     else:
         print()
