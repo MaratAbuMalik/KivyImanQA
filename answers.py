@@ -40,7 +40,7 @@ class Answers(Screen):
         for i in range(globals.questions_num):
             # answer = test_database[globals.test_answers[i]['question_num']]['answers'][
             # globals.test_answers[i]['answer_num']]
-            if globals.test_answers[i]['answer_num']:
+            if not globals.test_answers[i]['answer_num']:
                 prefix = '+ '
                 # postfix = '\nВаш ответ (правильный): ' + '\n' + answer
             else:

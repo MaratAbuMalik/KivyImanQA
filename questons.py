@@ -4,7 +4,7 @@ from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
 
 import globals
-from database import questions, unique_questions
+from database import test_database, unique_questions
 
 Builder.load_string('''
 #:import ListItemButton kivy.uix.listview.ListItemButton
@@ -31,7 +31,7 @@ class Questions(Screen):
     def on_enter(self):
         self.ids['list_view_id'].adapter.bind(on_selection_change=self.click)
         for i in range(len(unique_questions)):
-            self.add(str(i + 1) + '. ' + questions[unique_questions[i]])
+            self.add(str(i + 1) + '. ' + test_database[unique_questions[i]]['question'])
 
     def add(self, text):
         self.ids['list_view_id'].adapter.data.append(text)

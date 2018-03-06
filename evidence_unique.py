@@ -5,7 +5,7 @@ from kivy.lang import Builder
 from kivy.properties import StringProperty
 
 import globals
-from database import evidences, unique_questions
+from database import test_database
 
 Builder.load_string('''
 <EvidenceUnique>:
@@ -32,4 +32,4 @@ class EvidenceUnique(Screen):
 
     # on_enter, on_pre_leave, on_leave
     def on_enter(self):
-        self.evidence_text = evidences[globals.evidence_num]
+        self.evidence_text = test_database[globals.evidence_num]['evidence']
