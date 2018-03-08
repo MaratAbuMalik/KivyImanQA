@@ -4,7 +4,7 @@ from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
 
 import globals
-from database import test_database
+from database import database
 
 Builder.load_string('''
 #:import ListItemButton kivy.uix.listview.ListItemButton
@@ -46,7 +46,7 @@ class Answers(Screen):
             else:
                 prefix = '- '
                 # postfix = '\nВаш ответ (неправильный): ' + '\n' + answer
-            self.add(prefix + str(i + 1) + '. ' + test_database[globals.test_answers[i][
+            self.add(prefix + str(i + 1) + '. ' + database[globals.test_answers[i][
                 'question_num']]['question'])
 
     def add(self, text):

@@ -6,7 +6,7 @@ from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
 from kivy.properties import StringProperty
 from kivy.properties import BooleanProperty
-from database import test_database
+from database import database
 
 import globals
 
@@ -117,7 +117,7 @@ class Test(Screen):
 
     def next_question(self):
         self.question_num += 1
-        current_question = test_database[globals.test_questions[self.question_num]]['question']
+        current_question = database[globals.test_questions[self.question_num]]['question']
         self.question = current_question
         self.order = self.new_answers_order()
         self.fill_answers()
@@ -137,10 +137,10 @@ class Test(Screen):
             self.is_checkbox_3_active = not self.is_checkbox_3_active
 
     def fill_answers(self):
-        self.answer0 = test_database[globals.test_questions[self.question_num]]['answers'][self.order[0]]
-        self.answer1 = test_database[globals.test_questions[self.question_num]]['answers'][self.order[1]]
-        self.answer2 = test_database[globals.test_questions[self.question_num]]['answers'][self.order[2]]
-        self.answer3 = test_database[globals.test_questions[self.question_num]]['answers'][self.order[3]]
+        self.answer0 = database[globals.test_questions[self.question_num]]['answers'][self.order[0]]
+        self.answer1 = database[globals.test_questions[self.question_num]]['answers'][self.order[1]]
+        self.answer2 = database[globals.test_questions[self.question_num]]['answers'][self.order[2]]
+        self.answer3 = database[globals.test_questions[self.question_num]]['answers'][self.order[3]]
 
     def new_answers_order(self):
         order = list(range(4))
@@ -155,8 +155,8 @@ class Test(Screen):
         edges = [0]
         questions = []
         for i in range(1, globals.questions_num):
-            edges.append(edges[i - 1] + len(test_database) // globals.questions_num)
-        edges.append(len(test_database))
+            edges.append(edges[i - 1] + len(database) // globals.questions_num)
+        edges.append(len(database))
 
         for i in range(globals.questions_num):
             questions.append(random.randrange(edges[i], edges[i+1]))
