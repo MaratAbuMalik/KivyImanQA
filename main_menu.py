@@ -13,26 +13,21 @@ Builder.load_string('''
         padding: 8
 
         Label:
-            id: best_result
             text: 'best_result: x/y'
 
         Label:
-            id: previous_result
             text: 'previous_result: x/y'
 
         Label:
-            id: knowledge_evidence
             text_size: self.size
             text: root.knowledge_evidence
 
         Button:
-            id: learn_questions
             text: 'Изучить вопросы'
             on_press: 
                 root.manager.current = 'questions'
 
         Button:
-            id: start_test
             text: 'Начать тест'
             on_press: 
                 root.manager.current = 'test'

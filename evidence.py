@@ -9,11 +9,13 @@ from database import database
 
 Builder.load_string('''
 <Evidence>:
+
     BoxLayout:
         orientation: 'vertical'
+        padding:8
+        
         ScrollView:
             Label:
-                padding: [8, 8]
                 size_hint_y: None
                 height: self.texture_size[1]
                 text_size: self.width, None
@@ -23,13 +25,11 @@ Builder.load_string('''
             text: 'Назад'
             on_press: 
                 root.manager.current = 'answers'
-
 ''')
 
 
 class Evidence(Screen):
     evidence_text = StringProperty()
 
-    # on_enter, on_pre_leave, on_leave
     def on_enter(self):
         self.evidence_text = database[globals.evidence_num]['evidence']

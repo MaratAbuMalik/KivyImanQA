@@ -11,14 +11,11 @@ Builder.load_string('''
 #:import ListAdapter kivy.adapters.listadapter.ListAdapter
 
 <Questions>:
-    pos_hint: {'center_x': .5, 'center_y': .5}
-    do_default_tab: False
 
     BoxLayout:
-        id: box_layout_id
         orientation: 'vertical'
+        padding: 8
         ListView:
-            text_size: self.width, None
             id: list_view_id
             adapter:
                 ListAdapter(
