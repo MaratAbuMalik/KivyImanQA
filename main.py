@@ -15,6 +15,7 @@ from evidence import Evidence
 class MainApp(App):
     def build(self):
         screen_manager = ScreenManager()
+
         main_menu_screen = MainMenu(name='main_menu')
         questions_screen = Questions(name='questions')
         evidence_unique_screen = EvidenceUnique(name='evidence_unique')
@@ -22,6 +23,7 @@ class MainApp(App):
         result_screen = Result(name='result')
         answers_screen = Answers(name='answers')
         evidence_screen = Evidence(name='evidence')
+
         screen_manager.add_widget(main_menu_screen)
         screen_manager.add_widget(questions_screen)
         screen_manager.add_widget(evidence_unique_screen)
