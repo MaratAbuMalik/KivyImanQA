@@ -37,7 +37,7 @@ class Answers(Screen):
     def on_enter(self):
         self.ids['list_view_id'].adapter.data = []
         self.ids['list_view_id'].adapter.bind(on_selection_change=self.click)
-        for i in range(globals.questions_num):
+        for i in range(globals.num_questions):
             # answer = test_database[globals.test_answers[i]['question_num']]['answers'][
             # globals.test_answers[i]['answer_num']]
             if not globals.test_answers[i]['answer_num']:
