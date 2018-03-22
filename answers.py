@@ -11,21 +11,18 @@ Builder.load_string('''
 #:import ListAdapter kivy.adapters.listadapter.ListAdapter
     
 <Answers>:
-    pos_hint: {'center_x': .5, 'center_y': .5}
-    do_default_tab: False
 
     BoxLayout:
-        id: box_layout_id
         orientation: 'vertical'
+        padding: 8
+        
         ListView:
-            text_size: self.size
             id: list_view_id
-            width: 20
-            height: 100
             adapter:
                 ListAdapter(
                 cls=ListItemButton,
                 data=[])
+                
         Button:
             text: 'Назад'
             on_press: 
@@ -38,8 +35,6 @@ class Answers(Screen):
         self.ids['list_view_id'].adapter.data = []
         self.ids['list_view_id'].adapter.bind(on_selection_change=self.click)
         for i in range(globals.num_questions):
-            # answer = test_database[globals.test_answers[i]['question_num']]['answers'][
-            # globals.test_answers[i]['answer_num']]
             if not globals.test_answers[i]['answer_num']:
                 prefix = '+ '
                 # postfix = '\nВаш ответ (правильный): ' + '\n' + answer
@@ -53,7 +48,7 @@ class Answers(Screen):
         self.ids['list_view_id'].adapter.data.append(text)
 
     def click(self, *args):
-        # для нормальной работы кнопки назад на экране доводов
+        # для нормальной работы кнопки 'назад' на экране c доводом
         try:
             text = str(args[0].selection[0])
             pos1 = text.find('text=') + 7

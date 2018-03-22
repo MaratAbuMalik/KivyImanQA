@@ -14,17 +14,14 @@ Builder.load_string('''
         padding: 8
 
         Label:
-            id: mark
             text: root.mark_text
 
         Button:
-            id: learn_questions
             text: 'Главное меню'
             on_press: 
                 root.manager.current = 'main_menu'
 
         Button:
-            id: show_answers
             text: 'Мои ответы'
             on_press: 
                 root.manager.current = 'answers'
@@ -39,5 +36,5 @@ class Result(Screen):
         for i in globals.test_answers:
             if not i['answer_num']:
                 mark += 1
-        self.mark_text = 'Ваша оценка {0}'.format(mark)
+        self.mark_text = 'Ваша оценка: {0}/{1}'.format(mark, globals.num_questions)
 
